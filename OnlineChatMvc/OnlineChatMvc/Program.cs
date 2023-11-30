@@ -1,3 +1,5 @@
+using OnlineChatMvc.Hubs;
+
 namespace OnlineChatMvc
 {
     public class Program
@@ -8,6 +10,8 @@ namespace OnlineChatMvc
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -25,6 +29,8 @@ namespace OnlineChatMvc
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapHub<ChatHub>("/chat");
 
             app.Run();
         }
