@@ -11,7 +11,7 @@ namespace OnlineChatMvc.Hubs
         }
 
 
-        public void SendMessage(string message)
+        public void Send(string message)
         {
             //
         }
