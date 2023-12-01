@@ -11,9 +11,9 @@ namespace OnlineChatMvc.Hubs
         }
 
 
-        public void Send(string message)
+        public async Task Send(string message)
         {
-            //
+            await Clients.All.SendAsync("Receive", message);
         }
 
     }
