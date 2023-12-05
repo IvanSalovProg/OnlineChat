@@ -6,7 +6,7 @@
     <h1 class="display-4">Привет в чате.</h1>
     <div id="inputForm">
         <input type="text" id="message" />
-        <input type="button" id="sendBtn" value="Отправить" disabled="disabled" />
+        <input type="button" id="sendBtn" value="Отправить" />
     </div>
     <div id="chatroom"></div>
 </div>
@@ -35,7 +35,7 @@
 
     hubConnection.start()
         .then(function () {
-            document.getElementById("sendBtn").disabled = false;
+           // document.getElementById("sendBtn").disabled = false;
            console.log("Поключение успешно")
 
         })
