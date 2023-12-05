@@ -28,3 +28,29 @@ C:\Users\HP\Desktop\ИванУчеба\OnlineChat\OnlineChatMvc\OnlineChatMvc\ob
 C:\Users\HP\Desktop\ИванУчеба\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.pdb
 C:\Users\HP\Desktop\ИванУчеба\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.genruntimeconfig.cache
 C:\Users\HP\Desktop\ИванУчеба\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\ref\OnlineChatMvc.dll
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\appsettings.Development.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\appsettings.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\OnlineChatMvc.staticwebassets.runtime.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\OnlineChatMvc.exe
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\OnlineChatMvc.deps.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\OnlineChatMvc.runtimeconfig.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\OnlineChatMvc.dll
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\bin\Debug\net6.0\OnlineChatMvc.pdb
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.csproj.AssemblyReference.cache
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.GeneratedMSBuildEditorConfig.editorconfig
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.AssemblyInfoInputs.cache
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.AssemblyInfo.cs
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.csproj.CoreCompileInputs.cache
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.MvcApplicationPartsAssemblyInfo.cache
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.RazorAssemblyInfo.cache
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.RazorAssemblyInfo.cs
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\staticwebassets.build.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\staticwebassets.development.json
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\scopedcss\bundle\OnlineChatMvc.styles.css
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\scopedcss\projectbundle\OnlineChatMvc.bundle.scp.css
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.dll
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\refint\OnlineChatMvc.dll
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.pdb
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\OnlineChatMvc.genruntimeconfig.cache
+D:\Салов И.Д\OnlineChat\OnlineChatMvc\OnlineChatMvc\obj\Debug\net6.0\ref\OnlineChatMvc.dll
