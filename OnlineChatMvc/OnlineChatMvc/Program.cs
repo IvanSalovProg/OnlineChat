@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using OnlineChatMvc.Hubs;
 
 namespace OnlineChatMvc
@@ -8,8 +10,24 @@ namespace OnlineChatMvc
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("ChatConnectionString");
+
+            builder.Services.AddDbContext<GoodAppContext>(options => options.UseSqlite(connectionString));
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/login";
+                });
+
+            builder.Services.AddAuthorization();
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
 
             builder.Services.AddSignalR();
 
@@ -24,6 +42,7 @@ namespace OnlineChatMvc
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
