@@ -4,10 +4,27 @@
 
 <div class="text-left">
     <h1 class="display-4">Привет в чате.</h1>
-    <div id="inputForm">
-        <input type="text" id="message" />
-        <input type="button" id="sendBtn" value="Отправить" />
-    </div>
+    @if(!User.Identity.IsAuthenticated)
+    {
+       <form action="/Home/Login" method="post">
+            <div class="mb-3">
+                <label class="form-label">Ваше имя</label>
+                <input type="text" name="name" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    }
+    else
+    {
+        <div id="inputForm">
+            <input type="text" id="message" />
+            <input type="button" id="sendBtn" value="Отправить" />
+        </div>
+    }
+
+
+
+   
     <div id="chatroom"></div>
 </div>
 
