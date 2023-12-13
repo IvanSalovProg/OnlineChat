@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Message>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -13,6 +14,13 @@
             </div>
             <button type="submit" class="btn btn-primary">Войти</button>
         </form>
+
+        <div id="inputForm">
+            <input type="text" id="message" />
+            <input type="button" id="sendBtn" value="Отправить" />
+        </div>
+
+       
     }
     else
     {
@@ -35,7 +43,13 @@
 
 
    
-    <div id="chatroom"></div>
+    <div id="chatroom">
+@foreach(var message in Model)
+        {
+            <p>@message.Data.ToString("dd.MM HH:mm") <i>@message.User.Name</i> <br /> @message.Text</p>
+        }
+
+    </div>
 </div>
 
 <script>
@@ -44,11 +58,11 @@
         .withUrl("/chat")
         .build();
 
-    hubConnection.on("Receive", function (message) {
+    hubConnection.on("Receive", function (username, date, message) {
 
         let messageElement = document.createElement("p");
-        messageElement.textContent = message;
-        document.getElementById("chatroom").appendChild(messageElement);
+        messageElement.innerHTML = date + "<i>" + username + "</i> <br / >" + message;
+        document.getElementById("chatroom").prepend(messageElement);
     });
 
 

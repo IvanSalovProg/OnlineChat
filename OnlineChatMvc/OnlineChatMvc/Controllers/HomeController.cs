@@ -52,7 +52,12 @@ namespace OnlineChatMvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+           var messages = _context.Messages
+                .Include(p => p.User)
+                .OrderByDescending(x => x.Id).Take(50).ToList();
+
+
+            return View(messages);
         }
 
         public IActionResult Privacy()
