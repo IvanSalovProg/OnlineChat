@@ -20,6 +20,16 @@
             <input type="text" id="message" />
             <input type="button" id="sendBtn" value="Отправить" />
         </div>
+
+        <script>
+            document.getElementById("sendBtn").addEventListener("click", function () {
+                let message = document.getElementById("message").value;
+                hubConnection.invoke("Send", message)
+                    .catch(function (err) {
+                        return console.error(err.toString());
+                    });
+            });
+        </script>
     }
 
 
@@ -34,14 +44,6 @@
         .withUrl("/chat")
         .build();
 
-    document.getElementById("sendBtn").addEventListener("click", function () {
-        let message = document.getElementById("message").value;
-        hubConnection.invoke("Send", message)
-            .catch(function (err) {
-                return console.error(err.toString());
-            });
-    });
-
     hubConnection.on("Receive", function (message) {
 
         let messageElement = document.createElement("p");
@@ -52,7 +54,7 @@
 
     hubConnection.start()
         .then(function () {
-           // document.getElementById("sendBtn").disabled = false;
+           if(document.getElementById("SendBtn")) document.getElementById("sendBtn").disabled = false;
            console.log("Поключение успешно")
 
         })
