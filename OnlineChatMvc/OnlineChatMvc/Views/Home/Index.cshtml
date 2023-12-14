@@ -61,7 +61,7 @@
     hubConnection.on("Receive", function (username, date, message) {
 
         let messageElement = document.createElement("p");
-        messageElement.innerHTML = date + "<i>" + username + "</i> <br / >" + message;
+        messageElement.innerHTML = date + " <i>" + username + "</i> <br / >" + message;
         document.getElementById("chatroom").prepend(messageElement);
     });
 

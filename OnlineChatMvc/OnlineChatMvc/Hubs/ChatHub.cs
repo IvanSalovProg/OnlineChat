@@ -29,7 +29,7 @@ namespace OnlineChatMvc.Hubs
 
           await  _context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("Receive", Context.User.Identity.Name, DateTime.Now,  message);
+            await Clients.All.SendAsync("Receive", Context.User.Identity.Name, DateTime.Now.ToString("dd.MM HH:mm"),  message);
         }
 
     }
