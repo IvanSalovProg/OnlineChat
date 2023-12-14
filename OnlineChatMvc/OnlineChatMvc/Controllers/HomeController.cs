@@ -30,16 +30,26 @@ namespace OnlineChatMvc.Controllers
             {
               user = new User
                 {
-                   Name = name
+                   Name = name,
+                   Role = UserRole.User
                 };
 
                 _context.Users.Add(user);
                 _context.SaveChanges();
             }
 
+            //пользователь заблокирован
+            if (user.Role == UserRole.Banned)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var role = user.Role.ToString();
+
             var claims = new List<Claim>{
                 new Claim("Id", user.UserId.ToString()),
-                new Claim(ClaimTypes.Name, user.Name)
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, role),
 
             };
 
@@ -63,6 +73,12 @@ namespace OnlineChatMvc.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
