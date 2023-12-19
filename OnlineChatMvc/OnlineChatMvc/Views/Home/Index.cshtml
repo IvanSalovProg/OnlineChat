@@ -4,7 +4,7 @@
 }
 
 <div class="text-left">
-    <h1 class="display-4">Привет в чате.</h1>
+    <h1 class="display-4">Привет, @(User.Identity?.Name ?? "гость")</h1>
     <div asp-validation-summary="All"></div>
 
     @if(!User.Identity.IsAuthenticated)
@@ -53,7 +53,7 @@
                 @message.Text<br />
                 @if (User.IsInRole(UserRole.Admin.ToString()))
                 {
-                    <a href="/Home/DeleteMessage/@message.Id">Удалить сообщение</a>
+                    <a href="#" class="delete_message" data-id="@message.Id">Удалить сообщение</a>
                 }
             </p>
         }
@@ -67,11 +67,27 @@
         .withUrl("/chat")
         .build();
 
+    document.getElementsByClassName("delete_message").addEventListener("click", function () {
+        console.log("delete_message clicked")
+
+        // let message = document.getElementById("message").value;
+        // hubConnection.invoke("Send", message)
+        //     .catch(function (err) {
+        //         return console.error(err.toString());
+        //     });
+    });
+
     hubConnection.on("Receive", function (username, date, message) {
 
         let messageElement = document.createElement("p");
         messageElement.innerHTML = date + " <i>" + username + "</i> <br / >" + message;
         document.getElementById("chatroom").prepend(messageElement);
+    });
+
+
+    hubConnection.on("HideMessage", function (id) {
+
+        console.log("Hide message", id)
     });
 
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using OnlineChatMvc.Data;
 
@@ -16,12 +17,10 @@ namespace OnlineChatMvc.Hubs
         [Authorize]
         public async Task Send(string message)
         {
-            var userIdstr = Context.User.FindFirst("Id")?.Value;
-            var userId = Convert.ToInt32(userIdstr);
 
           await  _context.Messages.AddAsync(new Message
             {
-                UserId = userId,
+                UserId = GetUserId(),
                 Text = message,
                 Data = DateTime.Now
 
@@ -32,6 +31,30 @@ namespace OnlineChatMvc.Hubs
             await Clients.All.SendAsync("Receive", Context.User.Identity.Name, DateTime.Now.ToString("dd.MM HH:mm"),  message);
         }
 
+        [Authorize]
+        public async Task DeleteMessage(int id)
+        {
+            var message = _context.Messages.FirstOrDefault(x => x.Id == id);
+
+            if (message != null)
+          {
+                if (message.UserId == GetUserId() || Context.User.IsInRole(UserRole.Admin.ToString()))
+            {
+                _context.Messages.Remove(message);
+                _context.SaveChanges();
+            }
+         }
+
+            await Clients.All.SendAsync("HideMessage", message.Id);
+        }
+
+        private int GetUserId()
+        {
+            var userIdstr = Context.User.FindFirst("Id")?.Value;
+            var userId = Convert.ToInt32(userIdstr);
+
+            return userId;
+        }
     }
 
 }

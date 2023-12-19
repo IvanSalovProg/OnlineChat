@@ -63,17 +63,6 @@ namespace OnlineChatMvc.Controllers
             
         }
 
-        public IActionResult DeleteMessage(int id)
-        {
-            var message = _context.Messages.FirstOrDefault(x => x.Id == id);
-
-            if(message != null)
-            {
-                _context.Messages.Remove(message);
-                _context.SaveChanges();
-            }
-
-        }
 
         public IActionResult Index()
         {
