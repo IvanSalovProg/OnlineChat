@@ -41,7 +41,9 @@ namespace OnlineChatMvc.Controllers
             //пользователь заблокирован
             if (user.Role == UserRole.Banned)
             {
-                return RedirectToAction("Index");
+                ModelState.AddModelError("userBanned","Пользователь заблокирован.");
+
+                return View("Index", GetMessages());
             }
 
             var role = user.Role.ToString();
@@ -55,19 +57,14 @@ namespace OnlineChatMvc.Controllers
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Cookies");
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal (claimsIdentity));
-
+            
             return RedirectToAction("Index");
             
         }
 
         public IActionResult Index()
         {
-           var messages = _context.Messages
-                .Include(p => p.User)
-                .OrderByDescending(x => x.Id).Take(50).ToList();
-
-
-            return View(messages);
+            return View(GetMessages());
         }
 
         public IActionResult Privacy()
@@ -85,6 +82,15 @@ namespace OnlineChatMvc.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private List<Message> GetMessages()
+        {
+            var messages = _context.Messages
+                .Include(p => p.User)
+                .OrderByDescending(x => x.Id).Take(50).ToList();
+
+            return messages;
         }
     }
 }

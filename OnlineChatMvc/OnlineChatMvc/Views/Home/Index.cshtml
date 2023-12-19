@@ -5,6 +5,8 @@
 
 <div class="text-left">
     <h1 class="display-4">Привет в чате.</h1>
+    <div asp-validation-summary="All"></div>
+
     @if(!User.Identity.IsAuthenticated)
     {
        <form action="/Home/Login" method="post">
