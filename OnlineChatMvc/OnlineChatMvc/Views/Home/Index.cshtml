@@ -48,7 +48,14 @@
     <div id="chatroom">
 @foreach(var message in Model)
         {
-            <p>@message.Data.ToString("dd.MM HH:mm") <i>@message.User.Name</i> <br /> @message.Text</p>
+            <p>
+                @message.Data.ToString("dd.MM HH:mm") <i>@message.User.Name</i> <br />
+                @message.Text<br />
+                @if (User.IsInRole(UserRole.Admin.ToString()))
+                {
+                    <a href="/Home/DeleteMessage/@message.Id">Удалить сообщение</a>
+                }
+            </p>
         }
 
     </div>

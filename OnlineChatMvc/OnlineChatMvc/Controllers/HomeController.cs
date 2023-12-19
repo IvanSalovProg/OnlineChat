@@ -6,6 +6,7 @@ using OnlineChatMvc.Data;
 using OnlineChatMvc.Models;
 using System.Diagnostics;
 using System.Security.Claims;
+using System.Xml.Linq;
 
 namespace OnlineChatMvc.Controllers
 {
@@ -60,6 +61,18 @@ namespace OnlineChatMvc.Controllers
             
             return RedirectToAction("Index");
             
+        }
+
+        public IActionResult DeleteMessage(int id)
+        {
+            var message = _context.Messages.FirstOrDefault(x => x.Id == id);
+
+            if(message != null)
+            {
+                _context.Messages.Remove(message);
+                _context.SaveChanges();
+            }
+
         }
 
         public IActionResult Index()
