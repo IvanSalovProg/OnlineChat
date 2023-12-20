@@ -48,7 +48,7 @@
     <div id="chatroom">
 @foreach(var message in Model)
         {
-            <p>
+            <p id="message_@message.Id">
                 @message.Data.ToString("dd.MM HH:mm") <i>@message.User.Name</i> <br />
                 @message.Text<br />
                 @if (User.IsInRole(UserRole.Admin.ToString()))
@@ -67,15 +67,22 @@
         .withUrl("/chat")
         .build();
 
-    document.getElementsByClassName("delete_message").addEventListener("click", function () {
+    $('.delete_message').on('click', function () {
+       var messageId = $(this).data('id')
+        hubConnection.invoke("DeleteMessage", messageId)
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+
         console.log("delete_message clicked")
+    });
+
+   
+        
 
         // let message = document.getElementById("message").value;
-        // hubConnection.invoke("Send", message)
-        //     .catch(function (err) {
-        //         return console.error(err.toString());
-        //     });
-    });
+        
+    
 
     hubConnection.on("Receive", function (username, date, message) {
 
@@ -86,6 +93,8 @@
 
 
     hubConnection.on("HideMessage", function (id) {
+
+        $('#message_' + id).remove(); 
 
         console.log("Hide message", id)
     });
