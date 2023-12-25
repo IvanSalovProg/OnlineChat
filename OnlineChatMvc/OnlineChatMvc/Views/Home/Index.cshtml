@@ -62,12 +62,12 @@
 </div>
 
 <script>
-
+    var isAdmin = @(User.IsInRole(UserRole.Admin.ToString()) ? "true" : "false");
     const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl("/chat")
         .build();
 
-    $('.delete_message').on('click', function () {
+    $(document).on('click', '.delete_message', function () {
        var messageId = $(this).data('id')
         hubConnection.invoke("DeleteMessage", messageId)
             .catch(function (err) {
@@ -77,17 +77,16 @@
         console.log("delete_message clicked")
     });
 
-   
-        
+    hubConnection.on("Receive", function (message) {
+        let mes = '<p id="message_' + message.id + '" >'
 
-        // let message = document.getElementById("message").value;
-        
-    
-
-    hubConnection.on("Receive", function (username, date, message) {
+         mes += message.date + " <i>" + message.name + "</i> <br / >" + message.message + "<br / >";
+        if (isAdmin) mes += '<a href="#" class="delete_message" data-id="' + message.id + '">Удалить сообщение</a>'
+        mes += '</p>'
 
         let messageElement = document.createElement("p");
-        messageElement.innerHTML = date + " <i>" + username + "</i> <br / >" + message;
+        messageElement.innerHTML = mes;
+
         document.getElementById("chatroom").prepend(messageElement);
     });
 

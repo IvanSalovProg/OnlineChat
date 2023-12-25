@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using OnlineChatMvc.Data;
+using OnlineChatMvc.Models;
 
 namespace OnlineChatMvc.Hubs
 {
@@ -18,17 +20,27 @@ namespace OnlineChatMvc.Hubs
         public async Task Send(string message)
         {
 
-          await  _context.Messages.AddAsync(new Message
+            var newMessage = new Message
             {
                 UserId = GetUserId(),
                 Text = message,
                 Data = DateTime.Now
 
-            });
+            };
 
-          await  _context.SaveChangesAsync();
+            await _context.Messages.AddAsync(newMessage);
+            await _context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("Receive", Context.User.Identity.Name, DateTime.Now.ToString("dd.MM HH:mm"),  message);
+
+            var messageDto = new MessageDto
+            {
+                Id = newMessage.Id,
+                Name = Context.User.Identity.Name,
+                Data = DateTime.Now.ToString("dd.MM HH:mm"),
+                Message = message
+            };
+
+            await Clients.All.SendAsync("Receive", messageDto );
         }
 
         [Authorize]

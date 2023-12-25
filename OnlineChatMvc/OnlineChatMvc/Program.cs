@@ -1,7 +1,10 @@
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineChatMvc.Data;
 using OnlineChatMvc.Hubs;
+using OnlineChatMvc.Services;
 
 namespace OnlineChatMvc
 {
@@ -29,8 +32,17 @@ namespace OnlineChatMvc
             builder.Services.AddControllersWithViews();
 
 
+            builder.Services.AddHangfire(configuration => configuration
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseInMemoryStorage());
+
+            builder.Services.AddHangfireServer();
+
 
             builder.Services.AddSignalR();
+
+            builder.Services.AddScoped<ChatService>();
 
             var app = builder.Build();
 
@@ -46,11 +58,36 @@ namespace OnlineChatMvc
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                //Authorization = new[] { new BasicAuthAuthorizationFilter(new BasicAuthAuthorizationFilterOptions
+                //{
+                //    RequireSsl = false,
+                //    SslRedirect = false,
+                //    LoginCaseSensitive = true,
+                //    Users = new[]
+                //    {
+                //        new BasicAuthAuthorizationUser
+                //        {
+                //            Login = "sportsoft",
+                //            PasswordClear = "hangfire"
+                //        }
+                //    }
+                //}) }
+
+            });
+            
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.MapHub<ChatHub>("/chat");
+
+           
+            var scope = app.Services.CreateScope();
+            var chatService = scope.ServiceProvider.GetRequiredService<ChatService>();
+            RecurringJob.AddOrUpdate("DeleteOldMessages", () => chatService.DeleteOldMessages(), "* * * * *");
 
             app.Run();
         }
